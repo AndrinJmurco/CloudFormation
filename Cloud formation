@@ -1,0 +1,16 @@
+grains:
+  CFN-S3-Bucket:
+    kind: cloudformation
+    spec: 
+      source:
+        # store: autogen_repo_sandbox_4235f76y
+        path: https://.../AWSS3Bucket.yaml
+      region: '{{ .inputs.["AWS Region"] }}'
+      authentication:
+        - aws-auth
+      inputs:
+        - AccessControl: '{{ .inputs.["Access Control"] }}'
+        - BucketName: '{{ .inputs.["Bucket Name"] }}-{{ sandboxid | downcase }}'
+      outputs:
+         - Arn
+         - DomainName
